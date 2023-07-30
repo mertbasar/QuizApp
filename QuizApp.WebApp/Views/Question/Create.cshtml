@@ -1,0 +1,58 @@
+﻿@model QuizApp.Dto.QuestionDtos.QuestionDto
+
+<h1>Yeni Soru Ekle</h1>
+<div class="row">
+    <div class="col-12 col-sm-8 col-md-6">
+        <form method="post" asp-controller="Question" asp-action="Create">
+            <div class="form-group">
+                <div>
+                    <label class="form-label">Kategori Adı</label>
+                    <select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" id="category_list" class="form-select w-100">
+                        <option value="">-- Seçiniz --</option>
+                    </select>
+                </div>
+                <div class="mt-2">
+                    <label class="form-label">Quiz Adı</label>
+                    <select asp-for="QuizId" class="form-select w-100" id="quiz_list">
+                        <option value="">-- Seçiniz --</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">Soru</label>
+                    <input class="form-control w-100" asp-for="Text" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Soru Ekle</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script>
+        let categorySelect = document.querySelector('#category_list');
+        let quizSelect = document.querySelector('#quiz_list'); // "quizSelect" değişkenini global alanda tanımla
+        categorySelect.addEventListener('change', function () {
+            $.ajax({
+                url: `/Quiz/GetQuizById?categoryId=${this.value}`,
+                method: 'get',
+                success: function (quizzes) {
+                    quizSelect.innerHTML = '<option value="">-- Seçiniz --</option>';
+                    for (let quiz of quizzes) {
+                        let optionElement = document.createElement('option');
+                        optionElement.value = quiz.id;
+                        optionElement.innerText = quiz.name;
+                        quizSelect.appendChild(optionElement);
+                    }
+                }
+            });
+        });
+
+        // Quiz listesini al ve konsolda göster
+        var quizList = @Html.Raw(Json.Serialize(ViewBag.quizList));
+        console.log(quizList);
+    </script>
+    <script>
+        // Diğer script kodları...
+    </script>
+}

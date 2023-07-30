@@ -1,0 +1,13 @@
+﻿@model QuizApp.Dto.QuestionDtos.QuestionDto
+
+<h2>@Model.Text</h2>
+
+@foreach (var answer in Model.Answers)
+{
+    <div>
+        <input type="radio" name="selectedAnswer" value="@answer.Id" />
+        <label>@answer.Text</label>
+    </div>
+}
+
+<button type="submit">Cevapla</button>

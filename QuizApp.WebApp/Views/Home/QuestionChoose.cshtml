@@ -1,0 +1,58 @@
+﻿@model QuizApp.WebApp.Models.QuestionChooseViewModel
+
+<!-- Your existing HTML code for the question and answer display -->
+<div id="questionArea">
+    <!-- Render the first question and answers here -->
+    @Html.Partial("_QuestionPartial", Model.Questions.FirstOrDefault())
+</div>
+
+<!-- Add a hidden field to store the current question index -->
+<input type="hidden" id="currentQuestionIndex" value="0" />
+<input type="hidden" id="questionsJson" value="@Html.Raw(Json.Serialize(Model.Questions))" />
+
+<button id="nextQuestionButton">Next Question</button>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var questions = JSON.parse($("#questionsJson").val());
+            var questionCount = questions.length;
+            var score = 0;
+            var currentQuestionIndex = 0;
+
+            function showNextQuestion() {
+                var selectedAnswerId = $("input[name='selectedAnswer']:checked").val();
+                var currentQuestion = questions[currentQuestionIndex];
+
+                if (selectedAnswerId) {
+                    var selectedAnswer = currentQuestion.Answers.find(a => a.Id == selectedAnswerId);
+
+                    if (selectedAnswer && selectedAnswer.IsCorrect) {
+                        score++;
+                    }
+                }
+
+                $("#scoreDisplay").text("Score: " + score);
+
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questionCount) {
+                    $("#currentQuestionIndex").val(currentQuestionIndex);
+
+                    $("#questionArea").html(""); // Clear the previous question
+
+                    // Render the next question and answers
+                    var questionHtml = "@Html.Partial("_QuestionPartial", new QuizApp.Dto.QuestionDtos.QuestionDto())";
+                    questionHtml = questionHtml.replace("?", JSON.stringify(questions[currentQuestionIndex]));
+                    $("#questionArea").html(questionHtml);
+                } else {
+                    // All questions have been shown
+                    alert("Tüm sorular gösterildi. Score: " + score);
+                }
+            }
+
+            $("#nextQuestionButton").on("click", function () {
+                showNextQuestion();
+            });
+        });
+    </script>
+}

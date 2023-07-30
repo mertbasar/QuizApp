@@ -1,0 +1,12 @@
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\bin\Debug\net6.0\QuizApp.deps.json
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\bin\Debug\net6.0\QuizApp.dll
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\bin\Debug\net6.0\QuizApp.pdb
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\QuizApp.csproj.AssemblyReference.cache
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\QuizApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\QuizApp.AssemblyInfoInputs.cache
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\QuizApp.AssemblyInfo.cs
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\QuizApp.csproj.CoreCompileInputs.cache
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\QuizApp.dll
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\refint\QuizApp.dll
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\QuizApp.pdb
+C:\Users\mmert\OneDrive\Masaüstü\MVCQUİZM\QuizApp\QuizApp\obj\Debug\net6.0\ref\QuizApp.dll

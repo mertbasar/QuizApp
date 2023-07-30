@@ -1,0 +1,74 @@
+﻿@model IEnumerable<QuizApp.Dto.QuizDtos.QuizSummary>
+
+<h1>Quizler</h1>
+
+<div class="row">
+    <div class="col-12">
+        <div class="text-end mb-2">
+            <a asp-controller="Quiz" asp-action="Create" class="btn btn-primary btn-sm">Yeni Ekle</a>
+        </div>
+        <table class="table table striped " id="myTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Quiz Kategori</th>
+                    <th>Quiz Başlığı</th>
+                    <th>Soru Sayısı</th>
+                    <th>Quizin Açıklaması</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.Name</td>
+                        <td>@item.QuestionCount</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-danger delete-button" data-quiz-id="@item.Id">Sil</button>
+                                <a class="btn btn-warning d-inline-block ms-2" asp-controller="Quiz" asp-action="Edit" asp-route-id="@item.Id">Güncelle</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        let clickedButtons = document.getElementsByClassName('delete-button');
+        for(let i =0; i<clickedButtons.length;i++) {
+            var deleteButton = clickedButtons[i];
+            deleteButton.addEventListener('click', function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: `/Quiz/Delete?id=${this.dataset.quizId}`,
+                    method: 'post',
+                    success: function (event) {
+                        let confirmed = confirm("Silinmisinmi");
+                        if(confirmed){
+                            alert(event);
+                            window.location.reload(); // sayfayı yeniden yüklememi sağlıyor..
+                        }
+                        else
+                        {
+                            event.preventDefault();
+                        }
+
+                    }
+                });
+            })
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

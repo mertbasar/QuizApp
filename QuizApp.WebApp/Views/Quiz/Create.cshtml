@@ -1,0 +1,30 @@
+﻿@model QuizApp.Dto.QuizDtos.QuizDto
+<h1>Quiz Ekleme</h1>
+<div class="row">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+        <form method="post" asp-controller="Quiz" asp-action="Create">
+            <div class="mt-2">
+                <label>Marka Adı</label>
+                <select class="form-select" asp-for=categoryId asp-items="ViewBag.CategorySelectList"></select>
+            </div>
+            <div>
+                <label asp-for="Name">Quiz Başlığı</label>
+                <input class="form-control" asp-for="Name" />
+            </div>
+            <div>
+                <label asp-for="Description">Quiz Açıklaması</label>
+                <input class="form-control" asp-for="Description" />
+            </div>
+            <div>
+                <label asp-for="QuestionCount">Soru Sayısı</label>
+                <input class="form-control" asp-for="QuestionCount" />
+            </div>
+
+            <div class="mt-2">
+                <button type="submit" class="btn btn-success">
+                    Kaydet
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

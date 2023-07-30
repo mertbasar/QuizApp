@@ -1,0 +1,89 @@
+﻿@model IEnumerable<QuizApp.Dto.AnswerDtos.AnswerSummary>
+<div class="row">
+    <div class="col-12">
+        <div>
+@*            <button class="btn btn-outline-warning float-end btn-sm bs-2">
+                <a asp-controller="Answer" asp-action="Create" class="btn text-primary"> Yeni Cevap Ekle</a>
+            </button>*@
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Kategori</th>
+                    <th>Quiz Adı</th> 
+                    <th>Soru</th>
+                    <th>Cevaplar</th>
+                    <th>Doğru Cevap</th>
+                    <th>Cevap İşlemleri</th>
+                    <th>Soru İşlemleri</th>
+                    <th>Silme İşlemi</th>
+                    <th>Edit İşlemi</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td> 
+                        <td>@item.CategoryName</td>
+                        <td>@item.QuizName</td>
+                        <td>@item.Question</td>
+                        <td>@item.Text</td>
+                        <td>@item.IsCorrect</td>
+                        <td><a asp-controller="Answer" asp-action="AddAnswer" asp-route-questionId="@item.QuestionId">Cevap Ekle</a>
+                        </td>
+                        <td><a asp-controller="Answer" asp-action="Show" asp-route-id="@item.QuestionId">Soruya Git</a></td>
+
+
+
+                        <td><a asp-controller="Answer" asp-action="Edit" asp-route-id="@item.Id">Cevabı Düzenle</a></td>
+
+                        <td>
+                            <button class="btn btn-outline-danger delete-button" data-vehicle-id="@item.Id">Sil</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+@section Scripts
+
+    {
+    <script>
+        //document. yazdıktan sonra eriştiğimiz Property, Metot ve diğer üyeler DOM frameworkünün birer üyesidir.
+        //DOM -> Document Object Model sayfanın belge modeli..
+        document.addEventListener('DOMContentLoaded', function () {
+            let textItems = document.querySelectorAll('td:nth-child(5) br');
+            let textValues = Array.from(textItems).map(item => item.nextSibling.textContent.trim());
+            console.log(textValues);
+        });
+        let clickedButtons = document.getElementsByClassName('delete-button');
+        for (let i = 0; i < clickedButtons.length; i++) {
+            var deleteButton = clickedButtons[i];
+            deleteButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: `/Answer/Delete?id=${this.dataset.vehicleId}`,
+                    method: 'post',
+                    success: function (event) {
+                        let confirmed = confirm("Aracın Silinmek üzere devam etmek istiyor musunuz ? ");
+                        if (confirmed) {
+                            alert(event);
+                            window.location.reload(); // sayfayı yeniden yüklememi sağlıyor..
+                        }
+                        else {
+                            event.preventDefault();
+                        }
+                    }
+                });
+            })
+        }
+    </script>
+}

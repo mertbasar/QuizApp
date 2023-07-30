@@ -1,0 +1,14 @@
+﻿@model QuizApp.Dto.QuestionDtos.QuestionDto
+
+<div class="question-container">
+    <h3>@Model.Text</h3>
+    <ul>
+        @foreach (var answer in Model.Answers)
+        {
+            <li>
+                <input type="radio" name="selectedAnswer" value="@answer.Id" id="@answer.Id" />
+                <label for="@answer.Id">@answer.Text</label>
+            </li>
+        }
+    </ul>
+</div>

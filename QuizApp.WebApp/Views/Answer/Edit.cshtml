@@ -1,0 +1,19 @@
+﻿@model QuizApp.WebApp.Models.AnswerViewModel
+
+<h2>Edit Answer for Question: @Model.Text</h2>
+
+<form asp-controller="Answer" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Answer.Id" />
+
+    <div class="form-group">
+        <label asp-for="Answer.Text">Answer Text:</label>
+        <input asp-for="Answer.Text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Answer.IsCorrect">Is Correct:</label>
+        <input asp-for="Answer.IsCorrect" class="" />
+    </div>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+</form>

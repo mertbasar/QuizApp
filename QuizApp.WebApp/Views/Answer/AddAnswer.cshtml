@@ -1,0 +1,22 @@
+﻿@model QuizApp.Dto.AnswerDtos.AnswerDto
+
+<h2>Cevap Ekle</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <label for="Text">Cevap:</label>
+        @Html.TextAreaFor(m => m.Text, new { @class = "form-control", rows = 3 })
+        @Html.ValidationMessageFor(m => m.Text)
+    </div>
+
+    <div>
+        <label for="IsCorrect">Doğru Cevap:</label>
+        @Html.CheckBoxFor(m => m.IsCorrect)
+        @Html.ValidationMessageFor(m => m.IsCorrect)
+    </div>
+
+    <input type="hidden" name="QuestionId" value="@Model.QuestionId" />
+
+    <button type="submit">Cevabı Ekle</button>
+}

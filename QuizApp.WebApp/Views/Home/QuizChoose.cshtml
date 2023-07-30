@@ -1,0 +1,14 @@
+﻿@model IEnumerable<QuizApp.Dto.QuizDtos.QuizDto>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-3 p-5 border border-3 bg-success rounded-3">
+            @item.CategoryName
+            <a  href="#">@item.Name</a>
+            @item.QuestionCount
+            <a asp-controller="Question" asp-action="QuestionChoose" asp-route-id="@item.Id">@item.Name</a>
+        </div>
+    }
+</div>
